@@ -57,10 +57,24 @@ def typical_vertical(vertical):
   else:
     return "other"
 
+## 一番出現したverticalをリストで返す
+def mostFreqVertical(dict):
+  array = []
+  max_val = max(dict[x] for x in dict)
+  for k, v in list.iteritems():
+    if v == max_val:
+        array.push(k)
+  return array
+
 if __name__ == "__main__":
-  analyzeVertical = []
+  prevBrowserId = ""
+  prevSearchTime = ""
+  prevClickTime = ""
+  sessionTerm = 1800
+  sessionVertical = defaultdict(lambda: 0)
+  prevVertical = ""
   allDict = {
-    "all":defaultdict(lambda: 0)
+    "all": defaultdict(lambda: 0)
   }
   deviceDict = {
     "pc": defaultdict(lambda: 0),
@@ -86,18 +100,6 @@ if __name__ == "__main__":
     "gender": {},
     "generation": {}
   }
-  outputs["device"]["smartphone"] = open('/vgca/shared/c-yukadotami/data/device/smartphone.txt', "w")
-  outputs["device"]["pc"] = open('/vgca/shared/c-yukadotami/data/device/pc.txt', "w")
-  outputs["device"]["tablet"] = open('/vgca/shared/c-yukadotami/data/device/tablet.txt', "w")
-  outputs["device"]["tv"] = open('/vgca/shared/c-yukadotami/data/device/tv.txt', "w")
-  outputs["gender"]["m"] = open('/vgca/shared/c-yukadotami/data/gender/male.txt', "w")
-  outputs["gender"]["f"] = open('/vgca/shared/c-yukadotami/data/gender/female.txt', "w")
-  outputs["generation"]["10's"] = open('/vgca/shared/c-yukadotami/data/generation/10s.txt', "w")
-  outputs["generation"]["20's"] = open('/vgca/shared/c-yukadotami/data/generation/20s.txt', "w")
-  outputs["generation"]["30's"] = open('/vgca/shared/c-yukadotami/data/generation/30s.txt', "w")
-  outputs["generation"]["40's"] = open('/vgca/shared/c-yukadotami/data/generation/40s.txt', "w")
-  outputs["generation"]["50's"] = open('/vgca/shared/c-yukadotami/data/generation/50s.txt', "w")
-  outputs["generation"]["60's"] = open('/vgca/shared/c-yukadotami/data/generation/60s.txt', "w")
 
   for fileNum in xrange(2,9):
     for line in open('../data/2015110'+str(fileNum)+'_all', 'r'):
@@ -105,31 +107,60 @@ if __name__ == "__main__":
       if featureArray[11] != "":
         if featureArray[10] == "":
           continue
-        browseId = featureArray[0]
+        browserId = featureArray[0]
+        gender = featureArray[1]
+        birthYear = featureArray[2]
+        searchTime = featureArray[5]
         device = featureArray[8]
         vertical = typical_vertical(featureArray[10])
-        birthYear = featureArray[2]
-        gender = featureArray[1]
-          # vertical = "None"
-        allDict["all"]["all"] += 1
-        allDict["all"][vertical] += 1
-        if birthYear != "":
-          generation = generation_distinction(birthYear)
-          generationDict[generation]["all"] += 1
-          generationDict[generation][vertical] += 1
-          outputs["generation"][generation].write(line)
+        clickTime = featureArray[12]
 
-        if gender != "":
-          genderDict[gender]["all"] += 1
-          genderDict[gender][vertical] += 1
-          outputs["gender"][gender].write(line)
-
-        if device in ["smartphone", "tablet", "pc", "tv"]:
-          deviceDict[device]["all"] += 1
-          deviceDict[device][vertical] += 1
-          outputs["device"][device].write(line)
+        if browserId == prevBrowserId:
+          if searchTime == prevSearchTime: ##　検索時間が同じなら同じセッション
+            sessionVerticalArray.push[vertical]
+          elif (int(prevClickTime) - int(searchTime)) < sessionTerm:  ##30分以内に動作があれば同じセッション
+            sessionVertical[vertical] += 1
+            prevClickTime = clickTime
+            prevSearchTime = searchTime
         else:
-          other_device.push(device)
+          verticalList = mostFreqVertical(sessionVertical)
+          for vertical in verticalList:
+            allDict["all"]["all"] += 1
+            allDict["all"][vertical] += 1
+            if birthYear != "":
+              generation = generation_distinction(birthYear)
+              generationDict[generation]["all"] += 1
+              generationDict[generation][vertical] += 1
+
+            if gender != "":
+              genderDict[gender]["all"] += 1
+              genderDict[gender][vertical] += 1
+
+            if device in ["smartphone", "tablet", "pc", "tv"]:
+              deviceDict[device]["all"] += 1
+              deviceDict[device][vertical] += 1
+
+          sessionVertical = defaultdict(lambda: 0)
+          sessionVertical[vertical] += 1
+          prevClickTime = clickTime
+          prevSearchTime = searchTime
+
+    verticalList = mostFreqVertical(sessionVertical)
+    for vertical in verticalList:
+      allDict["all"]["all"] += 1
+      allDict["all"][vertical] += 1
+      if birthYear != "":
+        generation = generation_distinction(birthYear)
+        generationDict[generation]["all"] += 1
+        generationDict[generation][vertical] += 1
+
+      if gender != "":
+        genderDict[gender]["all"] += 1
+        genderDict[gender][vertical] += 1
+
+      if device in ["smartphone", "tablet", "pc", "tv"]:
+        deviceDict[device]["all"] += 1
+        deviceDict[device][vertical] += 1
 
   print_dict_content(allDict)
   print_dict_content(deviceDict)
