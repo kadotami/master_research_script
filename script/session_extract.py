@@ -23,6 +23,8 @@ def generation_distinction(birthYear):
 def print_dict_content(dic):
   for v in dic:
     allNum = dic[v]["all"]
+    if allNum == 0:
+      continue
     print ("----------"+v+"----------")
     dic[v] = sorted(dic[v].items(), key=lambda x: x[1])
     for y in dic[v]:
@@ -112,18 +114,18 @@ if __name__ == "__main__":
         browserId = featureArray[0]
         gender = featureArray[1]
         birthYear = featureArray[2]
-        searchTime = featureArray[5]
+        searchTime = featureArray[5].split(",")[0]
         device = featureArray[8]
         vertical = typical_vertical(featureArray[10])
-        clickTime = featureArray[12]
+        clickTime = featureArray[12].split(",")[0]
 
         if browserId == prevBrowserId:
-          if searchTime == prevSearchTime: ##　検索時間が同じなら同じセッション
+          ##　検索時間が同じなら同じセッション
+          if searchTime == prevSearchTime:
             sessionVertical[vertical] += 1
-          elif (int(prevClickTime) - int(searchTime)) <= sessionTerm:  ##30分以内に動作があれば同じセッション
+          ##30分以内に動作があれば同じセッション
+          elif (int(prevClickTime) - int(searchTime)) > 0 and (int(prevClickTime) - int(searchTime)) <= sessionTerm:
             sessionVertical[vertical] += 1
-            prevClickTime = clickTime
-            prevSearchTime = searchTime
           else:
             verticalList = mostFreqVertical(sessionVertical)
             for vertical in verticalList:
@@ -142,11 +144,8 @@ if __name__ == "__main__":
                 deviceDict[device]["all"] += 1
                 deviceDict[device][vertical] += 1
 
-              sessionVertical = defaultdict(lambda: 0)
-              sessionVertical[vertical] += 1
-              prevClickTime = clickTime
-              prevSearchTime = searchTime
-          prevBrowserId = browserId
+            sessionVertical = defaultdict(lambda: 0)
+            sessionVertical[vertical] += 1
         else:
           verticalList = mostFreqVertical(sessionVertical)
           for vertical in verticalList:
@@ -167,9 +166,9 @@ if __name__ == "__main__":
 
           sessionVertical = defaultdict(lambda: 0)
           sessionVertical[vertical] += 1
-          prevClickTime = clickTime
-          prevSearchTime = searchTime
-          prevBrowserId = browserId
+        prevClickTime = clickTime
+        prevSearchTime = searchTime
+        prevBrowserId = browserId
 
     verticalList = mostFreqVertical(sessionVertical)
     for vertical in verticalList:
@@ -188,8 +187,8 @@ if __name__ == "__main__":
         deviceDict[device]["all"] += 1
         deviceDict[device][vertical] += 1
     sessionVertical = defaultdict(lambda: 0)
-    prevClickTime = ""
-    prevSearchTime = ""
+    prevClickTime = 0
+    prevSearchTime = 0
 
   print_dict_content(allDict)
   print_dict_content(deviceDict)
