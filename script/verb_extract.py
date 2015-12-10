@@ -36,14 +36,12 @@ def typical_vertical(vertical):
 
 ## dicの中身をソートして出力
 def print_dict_content(dic):
-  for v in dic:
-    allNum = dic["all"]
-    if allNum == 0:
-      continue
-    print ("----------"+v+"----------")
-    dic = sorted(dic.items(), key=lambda x: x[1])
-    for y in dic:
-      print (y[0]+','+str(y[1]) + "," + str(float(y[1])/allNum * 100) + "%")
+  allNum = dic["all"]
+  if allNum == 0:
+    return
+  dic = sorted(dic.items(), key=lambda x: x[1])
+  for x in dic:
+    print (x[0]+','+str(x[1]) + "," + str(float(x[1])/allNum * 100) + "%")
 
 if __name__ == "__main__":
   verbDic = defaultdict(lambda: 0)
@@ -55,7 +53,10 @@ if __name__ == "__main__":
         if featureArray[10] == "":
           continue
         vertical = typical_vertical(featureArray[10])
-        query = featureArray[7]
+        try:
+          query = unicode(featureArray[7], 'utf-8')
+        except:
+          continue
         tagger = MeCab.Tagger("-Ochasen")
         encoded_text = query.encode('utf-8')
         node = tagger.parseToNode(encoded_text)
@@ -67,6 +68,7 @@ if __name__ == "__main__":
           word_kind = feature.split(",")[1]
           if speech in [r'動詞']:
             verbFlag = True
+          node = node.next
         if verbFlag:
           verbDic["all"] += 1
           verbDic[vertical] += 1
