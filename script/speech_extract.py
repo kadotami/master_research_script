@@ -36,15 +36,22 @@ def typical_vertical(vertical):
 
 ## dicの中身をソートして出力
 def print_dict_content(dic):
-  allNum = dic["all"]
-  if allNum == 0:
-    return
-  dic = sorted(dic.items(), key=lambda x: x[1])
-  for x in dic:
-    print (x[0]+','+str(x[1]) + "," + str(float(x[1])/allNum * 100) + "%")
+  for v in dic:
+    allNum = dic[v]["all"]
+    if allNum == 0:
+      continue
+    print ("----------"+v+"----------")
+    dic[v] = sorted(dic[v].items(), key=lambda x: x[1])
+    for y in dic[v]:
+      print (y[0]+','+str(y[1]) + "," + str(float(y[1])/allNum * 100) + "%")
 
+#メインスタート！
 if __name__ == "__main__":
-  verbDic = defaultdict(lambda: 0)
+  dic = {
+    "verb": defaultdict(lambda: 0),
+    "adj": defaultdict(lambda: 0),
+    "adv": defaultdict(lambda: 0)
+  }
   for fileNum in xrange(2,9):
     # for line in open('../data/2015110'+str(fileNum)+'_all', 'r'):
     for line in open('../data/small_data.txt','r'):
@@ -61,6 +68,8 @@ if __name__ == "__main__":
         encoded_text = query.encode('utf-8')
         node = tagger.parseToNode(encoded_text)
         verbFlag = False
+        adjFlag = False
+        advFlag = False
         while node:
           feature = node.feature
           source = feature.split(",")[6]
@@ -68,12 +77,22 @@ if __name__ == "__main__":
           word_kind = feature.split(",")[1]
           if speech in [r'動詞']:
             verbFlag = True
+          if speech in [r'形容詞']:
+            adjFlag = True
+          if speech in [r'副詞']:
+            adjFlag = True
           node = node.next
         if verbFlag:
-          verbDic["all"] += 1
-          verbDic[vertical] += 1
+          dic["verb"]["all"] += 1
+          dic["verb"][vertical] += 1
+        if adjFlag:
+          dic["adj"]["all"] += 1
+          dic["adj"][vertical] += 1
+        if advFlag:
+          dic["adv"]["all"] += 1
+          dic["adv"][vertical] += 1
 
 
-  print_dict_content(verbDic)
+  print_dict_content(dic)
 
 

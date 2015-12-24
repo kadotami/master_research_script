@@ -64,17 +64,6 @@ def typical_vertical(vertical):
   else:
     return "other"
 
-## 一番出現したverticalをリストで返す
-# def mostFreqVertical(dict):
-#   if dict == {}:
-#     return []
-#   array = []
-#   max_val = max(dict[x] for x in dict)
-#   for k, v in dict.iteritems():
-#     if v == max_val:
-#         array.append(k)
-#   return array
-
 if __name__ == "__main__":
   allDict = {
     "all": defaultdict(lambda: 0)
@@ -138,98 +127,53 @@ if __name__ == "__main__":
             prevClickTime = clickTime
             prevSearchTime = searchTime
           else:
-            # verticalList = mostFreqVertical(sessionVertical)
-            # for vertical in verticalList:
-            #   allDict["all"]["all"] += 1
-            #   allDict["all"][vertical] += 1
-            #   if birthYear != "":
-            #     generation = generation_distinction(birthYear)
-            #     generationDict[generation]["all"] += 1
-            #     generationDict[generation][vertical] += 1
-
-            #   if gender != "":
-            #     genderDict[gender]["all"] += 1
-            #     genderDict[gender][vertical] += 1
-
-            #   if device in ["smartphone", "tablet", "pc", "tv"]:
-            #     deviceDict[device]["all"] += 1
-            #     deviceDict[device][vertical] += 1
-              allSessionArray.append(sessionVerticalArray)
-              sessionVerticalArray = []
-              sessionVerticalArray.append(vertical)
-              prevClickTime = clickTime
-              prevSearchTime = searchTime
+            allSessionArray.append(sessionVerticalArray)
+            print str(gender)+"\t"+str(birthYear)+"\t"+str(device)+"\t"+str(sessionVerticalArray)
+            sessionVerticalArray = []
+            sessionVerticalArray.append(vertical)
+            prevClickTime = clickTime
+            prevSearchTime = searchTime
           prevBrowserId = browserId
         else:
-          # verticalList = mostFreqVertical(sessionVertical)
-          # for vertical in verticalList:
-          #   allDict["all"]["all"] += 1
-          #   allDict["all"][vertical] += 1
-          #   if birthYear != "":
-          #     generation = generation_distinction(birthYear)
-          #     generationDict[generation]["all"] += 1
-          #     generationDict[generation][vertical] += 1
-
-          #   if gender != "":
-          #     genderDict[gender]["all"] += 1
-          #     genderDict[gender][vertical] += 1
-
-          #   if device in ["smartphone", "tablet", "pc", "tv"]:
-          #     deviceDict[device]["all"] += 1
-          #     deviceDict[device][vertical] += 1
-
           allSessionArray.append(sessionVerticalArray)
+          print str(gender)+"\t"+str(birthYear)+"\t"+str(device)+"\t"+str(sessionVerticalArray)
           sessionVerticalArray = []
           sessionVerticalArray.append(vertical)
           prevClickTime = clickTime
           prevSearchTime = searchTime
           prevBrowserId = browserId
 
-    # verticalList = mostFreqVertical(sessionVertical)
-    # for vertical in verticalList:
-    #   allDict["all"]["all"] += 1
-    #   allDict["all"][vertical] += 1
-    #   if birthYear != "":
-    #     generation = generation_distinction(birthYear)
-    #     generationDict[generation]["all"] += 1
-    #     generationDict[generation][vertical] += 1
-
-    #   if gender != "":
-    #     genderDict[gender]["all"] += 1
-    #     genderDict[gender][vertical] += 1
-
-    #   if device in ["smartphone", "tablet", "pc", "tv"]:
-    #     deviceDict[device]["all"] += 1
-    #     deviceDict[device][vertical] += 1
+    ## ファイルの最後
     allSessionArray.append(sessionVerticalArray)
+    print str(gender)+"\t"+str(birthYear)+"\t"+str(device)+"\t"+str(sessionVerticalArray)
     sessionVerticalArray = []
     sessionVerticalArray.append(vertical)
     prevClickTime = ""
     prevSearchTime = ""
 
-  sessionOneQuery = defaultdict(lambda: 0)
-  sessionDict = {
-    "image": defaultdict(lambda: 0),
-    "chie": defaultdict(lambda: 0),
-    "video": defaultdict(lambda: 0),
-    "recipe": defaultdict(lambda: 0),
-    "loco": defaultdict(lambda: 0),
-    "news": defaultdict(lambda: 0),
-    "shopping": defaultdict(lambda: 0),
-    "auction": defaultdict(lambda: 0),
-    "realtime": defaultdict(lambda: 0),
-    "talent": defaultdict(lambda: 0),
-    "map": defaultdict(lambda: 0),
-    "dic": defaultdict(lambda: 0),
-    "other": defaultdict(lambda: 0)
-  }
-  for array in allSessionArray:
-    if len(array) < 1:
-      continue
-    elif len(array) < 2:
-      sessionOneQuery[array[0]] += 1
-      continue
-    for x in xrange(0,len(array)-1):
-      sessionDict[array[x]][array[x+1]] += 1
-      sessionDict[array[x]]["all"] += 1
-  print_dict_content(sessionDict)
+  # sessionOneQuery = defaultdict(lambda: 0)
+  # sessionDict = {
+  #   "image": defaultdict(lambda: 0),
+  #   "chie": defaultdict(lambda: 0),
+  #   "video": defaultdict(lambda: 0),
+  #   "recipe": defaultdict(lambda: 0),
+  #   "loco": defaultdict(lambda: 0),
+  #   "news": defaultdict(lambda: 0),
+  #   "shopping": defaultdict(lambda: 0),
+  #   "auction": defaultdict(lambda: 0),
+  #   "realtime": defaultdict(lambda: 0),
+  #   "talent": defaultdict(lambda: 0),
+  #   "map": defaultdict(lambda: 0),
+  #   "dic": defaultdict(lambda: 0),
+  #   "other": defaultdict(lambda: 0)
+  # }
+  # for array in allSessionArray:
+  #   if len(array) < 1:
+  #     continue
+  #   elif len(array) < 2:
+  #     sessionOneQuery[array[0]] += 1
+  #     continue
+  #   for x in xrange(0,len(array)-1):
+  #     sessionDict[array[x]][array[x+1]] += 1
+  #     sessionDict[array[x]]["all"] += 1
+  # print_dict_content(sessionDict)

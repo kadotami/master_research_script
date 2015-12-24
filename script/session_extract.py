@@ -126,6 +126,7 @@ if __name__ == "__main__":
           ##30分以内に動作があれば同じセッション
           elif (int(prevClickTime) - int(searchTime)) > 0 and (int(prevClickTime) - int(searchTime)) <= sessionTerm:
             sessionVertical[vertical] += 1
+          ## この行は前の行とセッション違う
           else:
             verticalList = mostFreqVertical(sessionVertical)
             for vertical in verticalList:
@@ -146,6 +147,7 @@ if __name__ == "__main__":
 
             sessionVertical = defaultdict(lambda: 0)
             sessionVertical[vertical] += 1
+        ## この行は前の行とセッション違う
         else:
           verticalList = mostFreqVertical(sessionVertical)
           for vertical in verticalList:
@@ -169,7 +171,7 @@ if __name__ == "__main__":
         prevClickTime = clickTime
         prevSearchTime = searchTime
         prevBrowserId = browserId
-
+    ## ファイルの最後
     verticalList = mostFreqVertical(sessionVertical)
     for vertical in verticalList:
       allDict["all"]["all"] += 1
