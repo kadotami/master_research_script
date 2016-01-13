@@ -23,7 +23,7 @@ if __name__ == "__main__":
     featureArray = line.split("\t")
     vertical = featureArray[10]
     gender = featureArray[1]
-    if vertical == "" or featureArray[11] == "":
+    if vertical == "":
       continue
     for pattern in rexp:
       if pattern.match(featureArray[7]):

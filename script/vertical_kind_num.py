@@ -38,6 +38,8 @@ def print_dict_content(dic):
       print (y[0]+','+str(y[1]) + "," + str(float(y[1])/allNum * 100) + "%")
 
 def ave(data):
+  if len(data) == 0:
+    return 0
   ans = float(sum(data))/float(len(data))
   return ans
 
@@ -92,6 +94,21 @@ if __name__ == "__main__":
       "kind": [],
     },
   }
+
+  len_dic = {
+    "m": defaultdict(lambda: 0),
+    "f": defaultdict(lambda: 0),
+    "10's": defaultdict(lambda: 0),
+    "20's": defaultdict(lambda: 0),
+    "30's": defaultdict(lambda: 0),
+    "40's": defaultdict(lambda: 0),
+    "50's": defaultdict(lambda: 0),
+    "60's": defaultdict(lambda: 0),
+    "pc": defaultdict(lambda: 0),
+    "tablet": defaultdict(lambda: 0),
+    "smartphone": defaultdict(lambda: 0),
+    "tv": defaultdict(lambda: 0),
+  }
   all_data = 0
   length_one = 0 #1つしかページを見ていないものがいくつあるか
   length_two_more = 0
@@ -106,20 +123,37 @@ if __name__ == "__main__":
     verticalList = literal_eval(featureArray[3])
     # verticalが1の時を除くかどうか
     all_data += 1
-    if len(verticalList) == 1:
-      length_one += 1
+    if len(verticalList) == 0:
       continue
-    length_two_more += 1
-    if gender != '':
-      dic[gender]["length"].append(len(verticalList))
-      dic[gender]["kind"].append(len(list(set(verticalList))))
-    if birthYear != '':
-      dic[generation]["length"].append(len(verticalList))
-      dic[generation]["kind"].append(len(list(set(verticalList))))
-    if device != '':
-      dic[device]["length"].append(len(verticalList))
-      dic[device]["kind"].append(len(list(set(verticalList))))
-
+    elif len(verticalList) == 1:
+      length_one += 1
+      if gender != '':
+        len_dic[gender][str(len(verticalList))] += 1
+        len_dic[gender]["all"] += 1
+      if birthYear != '':
+        len_dic[generation][str(len(verticalList))] += 1
+        len_dic[generation]["all"] += 1
+      if device != '':
+        len_dic[device][str(len(verticalList))] += 1
+        len_dic[device]["all"] += 1
+      continue
+    else:
+      length_two_more += 1
+      if gender != '':
+        dic[gender]["length"].append(len(verticalList))
+        dic[gender]["kind"].append(len(list(set(verticalList))))
+        len_dic[gender][str(len(verticalList))] += 1
+        len_dic[gender]["all"] += 1
+      if birthYear != '':
+        dic[generation]["length"].append(len(verticalList))
+        dic[generation]["kind"].append(len(list(set(verticalList))))
+        len_dic[generation][str(len(verticalList))] += 1
+        len_dic[generation]["all"] += 1
+      if device != '':
+        dic[device]["length"].append(len(verticalList))
+        dic[device]["kind"].append(len(list(set(verticalList))))
+        len_dic[device][str(len(verticalList))] += 1
+        len_dic[device]["all"] += 1
 
   print length_one, all_data
   print "======= gender ======="
@@ -138,3 +172,5 @@ if __name__ == "__main__":
   print ave(dic["pc"]["length"]),ave(dic["pc"]["kind"])
   print ave(dic["tablet"]["length"]),ave(dic["tablet"]["kind"])
   print ave(dic["smartphone"]["length"]),ave(dic["smartphone"]["kind"])
+
+  print_dict_content(len_dic)

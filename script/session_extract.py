@@ -162,7 +162,7 @@ if __name__ == "__main__":
               genderDict[gender]["all"] += 1
               genderDict[gender][vertical] += 1
 
-            if device in ["smartphone", "tablet", "pc", "tv"]:
+            if device in ["smartphone", "tablet", "pc", "tv", "featurephone"]:
               deviceDict[device]["all"] += 1
               deviceDict[device][vertical] += 1
 
@@ -185,7 +185,7 @@ if __name__ == "__main__":
         genderDict[gender]["all"] += 1
         genderDict[gender][vertical] += 1
 
-      if device in ["smartphone", "tablet", "pc", "tv"]:
+      if device in ["smartphone", "tablet", "pc", "tv", "featurephone"]:
         deviceDict[device]["all"] += 1
         deviceDict[device][vertical] += 1
     sessionVertical = defaultdict(lambda: 0)

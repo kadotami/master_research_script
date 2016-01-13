@@ -104,36 +104,28 @@ if __name__ == "__main__":
     for line in open('../data/2015110'+str(fileNum)+'_all', 'r'):
     # for line in open('../data/small_data.txt','r'):
       featureArray = line.split("\t")
-      if featureArray[11] != "":
-        if featureArray[10] == "":
-          continue
-        browserId = featureArray[0]
-        gender = featureArray[1]
-        birthYear = featureArray[2]
-        searchTime = featureArray[5].split(",")[0]
-        device = featureArray[8]
-        vertical = typical_vertical(featureArray[10])
-        clickTime = featureArray[12].split(",")[0]
+      # if featureArray[11] != "":
+      if featureArray[10] == "":
+        continue
+      browserId = featureArray[0]
+      gender = featureArray[1]
+      birthYear = featureArray[2]
+      searchTime = featureArray[5].split(",")[0]
+      device = featureArray[8]
+      vertical = typical_vertical(featureArray[10])
+      clickTime = featureArray[12].split(",")[0]
 
-        if browserId == prevBrowserId:
-          ##　検索時間が同じなら同じセッション
-          if searchTime == prevSearchTime:
-            sessionVerticalArray.append(vertical)
-            prevClickTime = clickTime
-            prevSearchTime = searchTime
-          ##30分以内に動作があれば同じセッション
-          elif (int(prevClickTime) - int(searchTime)) > 0 and (int(prevClickTime) - int(searchTime)) <= sessionTerm:
-            sessionVerticalArray.append(vertical)
-            prevClickTime = clickTime
-            prevSearchTime = searchTime
-          else:
-            allSessionArray.append(sessionVerticalArray)
-            print str(gender)+"\t"+str(birthYear)+"\t"+str(device)+"\t"+str(sessionVerticalArray)
-            sessionVerticalArray = []
-            sessionVerticalArray.append(vertical)
-            prevClickTime = clickTime
-            prevSearchTime = searchTime
-          prevBrowserId = browserId
+      if browserId == prevBrowserId:
+        ##　検索時間が同じなら同じセッション
+        if searchTime == prevSearchTime:
+          sessionVerticalArray.append(vertical)
+          prevClickTime = clickTime
+          prevSearchTime = searchTime
+        ##30分以内に動作があれば同じセッション
+        elif (int(prevClickTime) - int(searchTime)) > 0 and (int(prevClickTime) - int(searchTime)) <= sessionTerm:
+          sessionVerticalArray.append(vertical)
+          prevClickTime = clickTime
+          prevSearchTime = searchTime
         else:
           allSessionArray.append(sessionVerticalArray)
           print str(gender)+"\t"+str(birthYear)+"\t"+str(device)+"\t"+str(sessionVerticalArray)
@@ -141,7 +133,15 @@ if __name__ == "__main__":
           sessionVerticalArray.append(vertical)
           prevClickTime = clickTime
           prevSearchTime = searchTime
-          prevBrowserId = browserId
+        prevBrowserId = browserId
+      else:
+        allSessionArray.append(sessionVerticalArray)
+        print str(gender)+"\t"+str(birthYear)+"\t"+str(device)+"\t"+str(sessionVerticalArray)
+        sessionVerticalArray = []
+        sessionVerticalArray.append(vertical)
+        prevClickTime = clickTime
+        prevSearchTime = searchTime
+        prevBrowserId = browserId
 
     ## ファイルの最後
     allSessionArray.append(sessionVerticalArray)

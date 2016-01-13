@@ -117,10 +117,200 @@ if __name__ == "__main__":
     "other": defaultdict(lambda: 0)
   }
 
+  genderTransDict = {
+    "m": {
+      "image": defaultdict(lambda: 0),
+      "chie": defaultdict(lambda: 0),
+      "video": defaultdict(lambda: 0),
+      "recipe": defaultdict(lambda: 0),
+      "loco": defaultdict(lambda: 0),
+      "news": defaultdict(lambda: 0),
+      "shopping": defaultdict(lambda: 0),
+      "auction": defaultdict(lambda: 0),
+      "realtime": defaultdict(lambda: 0),
+      "talent": defaultdict(lambda: 0),
+      "map": defaultdict(lambda: 0),
+      "dic": defaultdict(lambda: 0),
+      "other": defaultdict(lambda: 0)
+    },
+    "f": {
+      "image": defaultdict(lambda: 0),
+      "chie": defaultdict(lambda: 0),
+      "video": defaultdict(lambda: 0),
+      "recipe": defaultdict(lambda: 0),
+      "loco": defaultdict(lambda: 0),
+      "news": defaultdict(lambda: 0),
+      "shopping": defaultdict(lambda: 0),
+      "auction": defaultdict(lambda: 0),
+      "realtime": defaultdict(lambda: 0),
+      "talent": defaultdict(lambda: 0),
+      "map": defaultdict(lambda: 0),
+      "dic": defaultdict(lambda: 0),
+      "other": defaultdict(lambda: 0)
+    },
+  }
+
+  generationTransDict = {
+    "10's": {
+      "image": defaultdict(lambda: 0),
+      "chie": defaultdict(lambda: 0),
+      "video": defaultdict(lambda: 0),
+      "recipe": defaultdict(lambda: 0),
+      "loco": defaultdict(lambda: 0),
+      "news": defaultdict(lambda: 0),
+      "shopping": defaultdict(lambda: 0),
+      "auction": defaultdict(lambda: 0),
+      "realtime": defaultdict(lambda: 0),
+      "talent": defaultdict(lambda: 0),
+      "map": defaultdict(lambda: 0),
+      "dic": defaultdict(lambda: 0),
+      "other": defaultdict(lambda: 0)
+    },
+    "20's": {
+      "image": defaultdict(lambda: 0),
+      "chie": defaultdict(lambda: 0),
+      "video": defaultdict(lambda: 0),
+      "recipe": defaultdict(lambda: 0),
+      "loco": defaultdict(lambda: 0),
+      "news": defaultdict(lambda: 0),
+      "shopping": defaultdict(lambda: 0),
+      "auction": defaultdict(lambda: 0),
+      "realtime": defaultdict(lambda: 0),
+      "talent": defaultdict(lambda: 0),
+      "map": defaultdict(lambda: 0),
+      "dic": defaultdict(lambda: 0),
+      "other": defaultdict(lambda: 0)
+    },
+    "30's": {
+      "image": defaultdict(lambda: 0),
+      "chie": defaultdict(lambda: 0),
+      "video": defaultdict(lambda: 0),
+      "recipe": defaultdict(lambda: 0),
+      "loco": defaultdict(lambda: 0),
+      "news": defaultdict(lambda: 0),
+      "shopping": defaultdict(lambda: 0),
+      "auction": defaultdict(lambda: 0),
+      "realtime": defaultdict(lambda: 0),
+      "talent": defaultdict(lambda: 0),
+      "map": defaultdict(lambda: 0),
+      "dic": defaultdict(lambda: 0),
+      "other": defaultdict(lambda: 0)
+    },
+    "40's": {
+      "image": defaultdict(lambda: 0),
+      "chie": defaultdict(lambda: 0),
+      "video": defaultdict(lambda: 0),
+      "recipe": defaultdict(lambda: 0),
+      "loco": defaultdict(lambda: 0),
+      "news": defaultdict(lambda: 0),
+      "shopping": defaultdict(lambda: 0),
+      "auction": defaultdict(lambda: 0),
+      "realtime": defaultdict(lambda: 0),
+      "talent": defaultdict(lambda: 0),
+      "map": defaultdict(lambda: 0),
+      "dic": defaultdict(lambda: 0),
+      "other": defaultdict(lambda: 0)
+    },
+    "50's": {
+      "image": defaultdict(lambda: 0),
+      "chie": defaultdict(lambda: 0),
+      "video": defaultdict(lambda: 0),
+      "recipe": defaultdict(lambda: 0),
+      "loco": defaultdict(lambda: 0),
+      "news": defaultdict(lambda: 0),
+      "shopping": defaultdict(lambda: 0),
+      "auction": defaultdict(lambda: 0),
+      "realtime": defaultdict(lambda: 0),
+      "talent": defaultdict(lambda: 0),
+      "map": defaultdict(lambda: 0),
+      "dic": defaultdict(lambda: 0),
+      "other": defaultdict(lambda: 0)
+    },
+    "60's": {
+      "image": defaultdict(lambda: 0),
+      "chie": defaultdict(lambda: 0),
+      "video": defaultdict(lambda: 0),
+      "recipe": defaultdict(lambda: 0),
+      "loco": defaultdict(lambda: 0),
+      "news": defaultdict(lambda: 0),
+      "shopping": defaultdict(lambda: 0),
+      "auction": defaultdict(lambda: 0),
+      "realtime": defaultdict(lambda: 0),
+      "talent": defaultdict(lambda: 0),
+      "map": defaultdict(lambda: 0),
+      "dic": defaultdict(lambda: 0),
+      "other": defaultdict(lambda: 0)
+    },
+  }
+
+  deviceTransDict = {
+    "pc": {
+      "image": defaultdict(lambda: 0),
+      "chie": defaultdict(lambda: 0),
+      "video": defaultdict(lambda: 0),
+      "recipe": defaultdict(lambda: 0),
+      "loco": defaultdict(lambda: 0),
+      "news": defaultdict(lambda: 0),
+      "shopping": defaultdict(lambda: 0),
+      "auction": defaultdict(lambda: 0),
+      "realtime": defaultdict(lambda: 0),
+      "talent": defaultdict(lambda: 0),
+      "map": defaultdict(lambda: 0),
+      "dic": defaultdict(lambda: 0),
+      "other": defaultdict(lambda: 0)
+    },
+    "tablet": {
+      "image": defaultdict(lambda: 0),
+      "chie": defaultdict(lambda: 0),
+      "video": defaultdict(lambda: 0),
+      "recipe": defaultdict(lambda: 0),
+      "loco": defaultdict(lambda: 0),
+      "news": defaultdict(lambda: 0),
+      "shopping": defaultdict(lambda: 0),
+      "auction": defaultdict(lambda: 0),
+      "realtime": defaultdict(lambda: 0),
+      "talent": defaultdict(lambda: 0),
+      "map": defaultdict(lambda: 0),
+      "dic": defaultdict(lambda: 0),
+      "other": defaultdict(lambda: 0)
+    },
+    "smartphone": {
+      "image": defaultdict(lambda: 0),
+      "chie": defaultdict(lambda: 0),
+      "video": defaultdict(lambda: 0),
+      "recipe": defaultdict(lambda: 0),
+      "loco": defaultdict(lambda: 0),
+      "news": defaultdict(lambda: 0),
+      "shopping": defaultdict(lambda: 0),
+      "auction": defaultdict(lambda: 0),
+      "realtime": defaultdict(lambda: 0),
+      "talent": defaultdict(lambda: 0),
+      "map": defaultdict(lambda: 0),
+      "dic": defaultdict(lambda: 0),
+      "other": defaultdict(lambda: 0)
+    },
+    "tv": {
+      "image": defaultdict(lambda: 0),
+      "chie": defaultdict(lambda: 0),
+      "video": defaultdict(lambda: 0),
+      "recipe": defaultdict(lambda: 0),
+      "loco": defaultdict(lambda: 0),
+      "news": defaultdict(lambda: 0),
+      "shopping": defaultdict(lambda: 0),
+      "auction": defaultdict(lambda: 0),
+      "realtime": defaultdict(lambda: 0),
+      "talent": defaultdict(lambda: 0),
+      "map": defaultdict(lambda: 0),
+      "dic": defaultdict(lambda: 0),
+      "other": defaultdict(lambda: 0)
+    },
+  }
+
   all_data = 0
   length_one = 0 #1つしかページを見ていないものがいくつあるか
   length_two = 0
   length_three = 0
+  common_state_num = 0
   for line in open('../data/serp_array.txt', 'r'):
   # for line in open('../data/serp_test_data.txt', 'r'):
     featureArray = line.split("\t")
@@ -141,6 +331,7 @@ if __name__ == "__main__":
     firstVirtical = verticalList[0]
     mostVerticalList = mostFreqVertical(verticalList)
     all_data += 1
+    first_allDict["all"]["all"] += 1
     first_allDict["all"][firstVirtical] += 1
     #  各属性の最初のverticalの数
     if gender != '':
@@ -156,28 +347,69 @@ if __name__ == "__main__":
     # 最初のヴァーティカルと頻出するヴァーティカルが同じものを出す
     # 条件は3つ以上クリックしていてで出現回数が2以上のもの
     if len(verticalList) > 2 and len(verticalList) != len(mostVerticalList):
+      common_state_num += 1
       if firstVirtical in mostVerticalList:
+        common_allDict["all"]["all"] += 1
         common_allDict["all"][firstVirtical] += 1
         if gender != '':
+          common_genderDict[gender]["all"] += 1
           common_genderDict[gender][firstVirtical] += 1
         if generation != '':
+          common_generationDict[generation]["all"] += 1
           common_generationDict[generation][firstVirtical] += 1
         if device != '':
+          common_deviceDict[device]["all"] += 1
           common_deviceDict[device][firstVirtical] += 1
 
     # 遷移確率を求める
     if len(verticalList) > 1:
       for x in xrange(0,len(verticalList)-1):
-        transDict[verticalList[x]][verticalList[x+1]] += 1
         transDict[verticalList[x]]["all"] += 1
+        transDict[verticalList[x]][verticalList[x+1]] += 1
+        if gender != '':
+          genderTransDict[gender][verticalList[x]]["all"] += 1
+          genderTransDict[gender][verticalList[x]][verticalList[x+1]] += 1
+        if generation != '':
+          generationTransDict[generation][verticalList[x]]["all"] += 1
+          generationTransDict[generation][verticalList[x]][verticalList[x+1]] += 1
+        if device != '':
+          deviceTransDict[device][verticalList[x]]["all"] += 1
+          deviceTransDict[device][verticalList[x]][verticalList[x+1]] += 1
 
   print all_data,length_one,length_two,length_three
+  print "=====first====="
   print_dict_content(first_allDict)
   print_dict_content(first_genderDict)
   print_dict_content(first_generationDict)
   print_dict_content(first_deviceDict)
+  print "=====common====="
+  print "=  "+ str(common_state_num)
+  print "================"
   print_dict_content(common_allDict)
   print_dict_content(common_genderDict)
   print_dict_content(common_generationDict)
   print_dict_content(common_deviceDict)
+  print "=====trans====="
   print_dict_content(transDict)
+  print "=====m trans====="
+  print_dict_content(genderTransDict["m"])
+  print "=====f trans====="
+  print_dict_content(genderTransDict["f"])
+  print "=====10 trans====="
+  print_dict_content(generationTransDict["10's"])
+  print "=====20 trans====="
+  print_dict_content(generationTransDict["20's"])
+  print "=====30 trans====="
+  print_dict_content(generationTransDict["30's"])
+  print "=====40 trans====="
+  print_dict_content(generationTransDict["40's"])
+  print "=====50 trans====="
+  print_dict_content(generationTransDict["50's"])
+  print "=====60 trans====="
+  print_dict_content(generationTransDict["60's"])
+  print "=====pc trans====="
+  print_dict_content(deviceTransDict["pc"])
+  print "=====tablet trans====="
+  print_dict_content(deviceTransDict["tablet"])
+  print "=====smartphone trans====="
+  print_dict_content(deviceTransDict["smartphone"])

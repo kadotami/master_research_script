@@ -79,38 +79,43 @@ if __name__ == "__main__":
   prevClickTime = ""
   SerpVerticalArray = []
   prevVertical = ""
+  prevQuery = ""
 
   for fileNum in xrange(2,9):
     for line in open('../data/2015110'+str(fileNum)+'_all', 'r'):
     # for line in open('../data/small_data.txt','r'):
       featureArray = line.split("\t")
-      if featureArray[11] != "":
-        if featureArray[10] == "":
-          continue
-        browserId = featureArray[0]
-        gender = featureArray[1]
-        birthYear = featureArray[2]
-        searchTime = featureArray[5].split(",")[0]
-        device = featureArray[8]
-        vertical = typical_vertical(featureArray[10])
-        clickTime = featureArray[12].split(",")[0]
+      # if featureArray[11] != "":
+      if featureArray[10] == "":
+        continue
+      browserId = featureArray[0]
+      gender = featureArray[1]
+      birthYear = featureArray[2]
+      query = featureArray[7].replace('　', ' ')
+      searchTime = featureArray[5].split(",")[0]
+      device = featureArray[8]
+      vertical = typical_vertical(featureArray[10])
+      clickTime = featureArray[12].split(",")[0]
 
-        ## ブラウザIDと検索時間が同じならサープは同じ
-        if browserId == prevBrowserId and searchTime == prevSearchTime:
-          SerpVerticalArray.append(vertical)
-          prevClickTime = clickTime
-          prevSearchTime = searchTime
-          prevBrowserId = browserId
-        else:
-          print str(gender)+"\t"+str(birthYear)+"\t"+str(device)+"\t"+str(SerpVerticalArray)
-          SerpVerticalArray = []
-          SerpVerticalArray.append(vertical)
-          prevClickTime = clickTime
-          prevSearchTime = searchTime
-          prevBrowserId = browserId
-    print str(gender)+"\t"+str(birthYear)+"\t"+str(device)+"\t"+str(SerpVerticalArray)
+      ## ブラウザIDと検索時間が同じならサープは同じ
+      if browserId == prevBrowserId and searchTime == prevSearchTime:
+        SerpVerticalArray.append(vertical)
+        prevClickTime = clickTime
+        prevSearchTime = searchTime
+        prevBrowserId = browserId
+        prevQuery = query
+      else:
+        print str(gender)+"\t"+str(birthYear)+"\t"+str(device)+"\t"+str(SerpVerticalArray)+"\t" + prevQuery
+        SerpVerticalArray = []
+        SerpVerticalArray.append(vertical)
+        prevClickTime = clickTime
+        prevSearchTime = searchTime
+        prevBrowserId = browserId
+        prevQuery = query
+    print str(gender)+"\t"+str(birthYear)+"\t"+str(device)+"\t"+str(SerpVerticalArray)+"\t" + prevQuery
     SerpVerticalArray = []
     SerpVerticalArray.append(vertical)
     prevClickTime = clickTime
     prevSearchTime = searchTime
     prevBrowserId = browserId
+    prevQuery = query

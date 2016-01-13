@@ -50,47 +50,54 @@ if __name__ == "__main__":
   dic = {
     "verb": defaultdict(lambda: 0),
     "adj": defaultdict(lambda: 0),
-    "adv": defaultdict(lambda: 0)
+    "adv": defaultdict(lambda: 0),
+    "noNoun": defaultdict(lambda: 0),
   }
   for fileNum in xrange(2,9):
-    # for line in open('../data/2015110'+str(fileNum)+'_all', 'r'):
-    for line in open('../data/small_data.txt','r'):
+    for line in open('../data/2015110'+str(fileNum)+'_all', 'r'):
+    # for line in open('../data/small_data.txt','r'):
       featureArray = line.split("\t")
-      if featureArray[11] != "":
-        if featureArray[10] == "":
-          continue
-        vertical = typical_vertical(featureArray[10])
-        try:
-          query = unicode(featureArray[7], 'utf-8')
-        except:
-          continue
-        tagger = MeCab.Tagger("-Ochasen")
-        encoded_text = query.encode('utf-8')
-        node = tagger.parseToNode(encoded_text)
-        verbFlag = False
-        adjFlag = False
-        advFlag = False
-        while node:
-          feature = node.feature
-          source = feature.split(",")[6]
-          speech = feature.split(",")[0]
-          word_kind = feature.split(",")[1]
-          if speech in [r'動詞']:
-            verbFlag = True
-          if speech in [r'形容詞']:
-            adjFlag = True
-          if speech in [r'副詞']:
-            adjFlag = True
-          node = node.next
-        if verbFlag:
-          dic["verb"]["all"] += 1
-          dic["verb"][vertical] += 1
-        if adjFlag:
-          dic["adj"]["all"] += 1
-          dic["adj"][vertical] += 1
-        if advFlag:
-          dic["adv"]["all"] += 1
-          dic["adv"][vertical] += 1
+      # if featureArray[11] != "":
+      if featureArray[10] == "":
+        continue
+      vertical = typical_vertical(featureArray[10])
+      try:
+        query = unicode(featureArray[7], 'utf-8')
+      except:
+        continue
+      tagger = MeCab.Tagger("-Ochasen")
+      encoded_text = query.encode('utf-8')
+      node = tagger.parseToNode(encoded_text)
+      verbFlag = False
+      adjFlag = False
+      advFlag = False
+      nounFlag = False
+      while node:
+        feature = node.feature
+        source = feature.split(",")[6]
+        speech = feature.split(",")[0]
+        word_kind = feature.split(",")[1]
+        if speech in [r'名詞']:
+          nounFlag = True
+        if speech in [r'動詞']:
+          verbFlag = True
+        if speech in [r'形容詞']:
+          adjFlag = True
+        if speech in [r'副詞']:
+          adjFlag = True
+        node = node.next
+      if verbFlag:
+        dic["verb"]["all"] += 1
+        dic["verb"][vertical] += 1
+      if adjFlag:
+        dic["adj"]["all"] += 1
+        dic["adj"][vertical] += 1
+      if advFlag:
+        dic["adv"]["all"] += 1
+        dic["adv"][vertical] += 1
+      if nounFlag == False:
+        dic["noNoun"]["all"] += 1
+        dic["noNoun"][vertical] += 1
 
 
   print_dict_content(dic)
