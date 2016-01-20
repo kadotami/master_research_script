@@ -6,10 +6,10 @@ import re
 
 if __name__ == "__main__":
   rexps = []
-  rexps.append(re.compile(r'.*%s.*' % "www.youtube"))
-  rexps.append(re.compile(r'.*%s.*' % "m.youtube"))
-  rexps.append(re.compile(r'.*%s.*' % "www.nicovideo"))
-  rexps.append(re.compile(r'.*%s.*' % "sp.nicovideo"))
+  rexps.append(re.compile(r'.*%s.*' % "www\.youtube"))
+  rexps.append(re.compile(r'.*%s.*' % "m\.youtube"))
+  rexps.append(re.compile(r'.*%s.*' % "www\.nicovideo"))
+  rexps.append(re.compile(r'.*%s.*' % "sp\.nicovideo"))
   all_num = 0
   video = 0
   for fileNum in xrange(2,9):
