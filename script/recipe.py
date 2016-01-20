@@ -19,18 +19,20 @@ if __name__ == "__main__":
   verticals = defaultdict(lambda: 0)
   querys = []
   rexp = [re.compile(r'.*%s.*' % "クックパッド"), re.compile(r'.*%s.*' % "レシピ")]
-  for line in open('../data/20151102_all', 'r'):
-    featureArray = line.split("\t")
-    vertical = featureArray[10]
-    gender = featureArray[1]
-    if vertical == "":
-      continue
-    for pattern in rexp:
-      if pattern.match(featureArray[7]):
-        if vertical in ["recipe", "cookpad", "hrecipe", "rcp"]:
-          verticals["recipe"] += 1
-          verticals["all"] += 1
-        else:
-          verticals[vertical] += 1
-          verticals["all"] += 1
+  for fileNum in xrange(2,9):
+    # for line in open('../data/2015110'+str(fileNum)+'_all', 'r'):
+    for line in open('../data/small_data.txt', 'r'):
+      featureArray = line.split("\t")
+      vertical = featureArray[10]
+      gender = featureArray[1]
+      if vertical == "":
+        continue
+      for pattern in rexp:
+        if pattern.match(featureArray[7]):
+          if vertical in ["recipe", "cookpad", "hrecipe", "rcp"]:
+            verticals["recipe"] += 1
+            verticals["all"] += 1
+          else:
+            verticals[vertical] += 1
+            verticals["all"] += 1
   print_dict_content(verticals)
