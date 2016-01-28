@@ -63,3 +63,8 @@ def is_holiday(date):#datetime型で引数を取る
   if jholiday.holiday_name(date.year,date.month,date.day) is not None or date.weekday() > 5:
     return True
   return False
+
+
+def unix2hour(unixtime):
+  return str(datetime.datetime.fromtimestamp(unixtime).hour)
+
