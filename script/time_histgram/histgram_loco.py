@@ -98,12 +98,14 @@ if __name__ == '__main__':
     date = '2015110'+str(fileNum)
     for line in open('../data/'+str(date)+'_all', 'r'):
       featureArray = line.split("\t")
+      vertical = cm.typical_vertical(featureArray[10])
+      if vertical != "loco":
+        continue
       gender = featureArray[1]
       birthYear = featureArray[2]
       query = featureArray[7].replace('　', ' ')
       searchTime = featureArray[5].split(",")[0]
       device = featureArray[8]
-      vertical = cm.typical_vertical(featureArray[10])
       clickTime = featureArray[12].split(",")[0]
       week = "week"
       if cm.is_holiday(datetime.strptime(date,"%Y%m%d")):

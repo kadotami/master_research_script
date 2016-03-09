@@ -10,7 +10,7 @@ sys.setdefaultencoding('utf-8')
 
 ##################################
 #
-#   クエリの単語数による差
+#   特定の単語数のクエリを抽出
 #################################
 
 def print_dict_content(dic):
@@ -37,22 +37,10 @@ if __name__ == '__main__':
       featureArray = line.split("\t")
       if featureArray[10] == "":
         continue
-      gender = featureArray[1]
-      birthYear = featureArray[2]
       query = featureArray[7].replace('　', ' ')
-      searchTime = featureArray[5].split(",")[0]
-      device = featureArray[8]
       vertical = cm.typical_vertical(featureArray[10])
+      if vertical != "video":
+        continue
       length = len(query.split(" "))
-      if length > 5:
-        length = 5
-
-      dic["all"]["all"] += 1
-      dic[str(length)][vertical] += 1
-      dic[str(length)]["all"] += 1
-
-
-  cm.print_dict_content(dic)
-
-
-
+      if length > 4:
+        print featureArray[7]

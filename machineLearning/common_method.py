@@ -70,4 +70,3 @@ def unix2hour(unixtime):
 
 def unix2date(unixtime):
   return str(datetime.datetime.fromtimestamp(unixtime).strftime("%Y%m%d"))
-

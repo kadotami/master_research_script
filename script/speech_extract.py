@@ -51,6 +51,7 @@ if __name__ == "__main__":
     "verb": defaultdict(lambda: 0),
     "adj": defaultdict(lambda: 0),
     "adv": defaultdict(lambda: 0),
+    "joshi": defaultdict(lambda: 0),
     "noNoun": defaultdict(lambda: 0),
   }
   for fileNum in xrange(2,9):
@@ -72,6 +73,7 @@ if __name__ == "__main__":
       adjFlag = False
       advFlag = False
       nounFlag = False
+      joshiFlag = False
       while node:
         feature = node.feature
         source = feature.split(",")[6]
@@ -85,6 +87,8 @@ if __name__ == "__main__":
           adjFlag = True
         if speech in [r'副詞']:
           adjFlag = True
+        if speech in [r'助詞']:
+          joshiFlag = True
         node = node.next
       if verbFlag:
         dic["verb"]["all"] += 1
@@ -95,6 +99,9 @@ if __name__ == "__main__":
       if advFlag:
         dic["adv"]["all"] += 1
         dic["adv"][vertical] += 1
+      if joshiFlag:
+        dic["joshi"]["all"] += 1
+        dic["joshi"][vertical] += 1
       if nounFlag == False:
         dic["noNoun"]["all"] += 1
         dic["noNoun"][vertical] += 1
