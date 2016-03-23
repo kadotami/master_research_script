@@ -70,3 +70,55 @@ def unix2hour(unixtime):
 
 def unix2date(unixtime):
   return str(datetime.datetime.fromtimestamp(unixtime).strftime("%Y%m%d"))
+
+def label2id(label):
+  if label == "image":
+    return 1
+  elif label == "video":
+    return 2
+  elif label == "dic":
+    return 3
+  elif label == "chie":
+    return 4
+  elif label == "map":
+    return 5
+  elif label == "realtime":
+    return 6
+  elif label == "news":
+    return 7
+  elif label == "shopping":
+    return 8
+  elif label == "auction":
+    return 9
+  elif label == "talent":
+    return 10
+  elif label == "recipe":
+    return 11
+  elif label == "loco":
+    return 12
+
+def id2label(id):
+  if id == 1:
+    return "image"
+  elif id == 2:
+    return "video"
+  elif id == 3:
+    return "dic"
+  elif id == 4:
+    return "chie"
+  elif id == 5:
+    return "map"
+  elif id == 6:
+    return "realtime"
+  elif id == 7:
+    return "news"
+  elif id == 8:
+    return "shopping"
+  elif id == 9:
+    return "auction"
+  elif id == 10:
+    return "talent"
+  elif id == 11:
+    return "recipe"
+  elif id == 12:
+    return "loco"

@@ -38,7 +38,7 @@ if __name__ == '__main__':
       if featureArray[10] == "":
         continue
       dic = {
-        "array" : np.array([]),
+        "array" : np.zeros(44),
         "answer": vertical
       }
       device = featureArray[8]
@@ -54,14 +54,14 @@ if __name__ == '__main__':
       hour = cm.unix2hour(float(searchTime))
       is_holiday = cm.is_holiday(datetime.strptime(date,"%Y%m%d"))
 
-      dic["array"] = am.device(dic["array"], device)
-      dic["array"] = am.generation(dic["array"], birthYear)
-      dic["array"] = am.gender(dic["array"], gender)
-      dic["array"] = am.time(dic["array"], hour)
+      dic["array"] = am.s_device(dic["array"], device)
+      dic["array"] = am.s_generation(dic["array"], birthYear)
+      dic["array"] = am.s_gender(dic["array"], gender)
+      dic["array"] = am.s_time(dic["array"], hour)
       if is_holiday:
-        dic["array"] = np.append(dic["array"],35)
-      dic["array"] = am.term_len(dic["array"], term_len)
-      dic["array"] = am.speech(dic["array"], query)
+        dic["array"][35] = 1
+      dic["array"] = am.s_term_len(dic["array"], term_len)
+      dic["array"] = am.s_speech(dic["array"], query)
 
       array.append(dic)
 
